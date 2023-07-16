@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Recordtimer"
+run/main_scene="res://timer.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
