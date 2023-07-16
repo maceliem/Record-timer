@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3ns1l6itunkm"]
+
+[ext_resource type="Script" path="res://timer.gd" id="1_1yi5r"]
+[ext_resource type="Theme" uid="uid://cq3bgtj642rw6" path="res://theme.tres" id="1_2mpgd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1yi5r")
+
+[node name="highScore" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 135.0
+grow_horizontal = 2
+theme = ExtResource("1_2mpgd")
+theme_override_colors/font_color = Color(0.890196, 0.803922, 0.239216, 1)
+text = "00:00.00"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2mpgd")
+text = "00:00.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+layout_mode = 2
+ratio = 3.0
+
+[node name="Start" type="Button" parent="VBoxContainer/AspectRatioContainer"]
+layout_mode = 2
+theme = ExtResource("1_2mpgd")
+text = "Start"
+
+[node name="Stop" type="Button" parent="VBoxContainer/AspectRatioContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_2mpgd")
+text = "Stop
+"
+
+[node name="Clock" type="Timer" parent="."]
+wait_time = 0.01
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -260.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CheckButton" type="CheckButton" parent="CenterContainer"]
+layout_mode = 2
+theme = ExtResource("1_2mpgd")
+
+[node name="Clear" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -264.5
+offset_bottom = -209.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_2mpgd")
+theme_override_font_sizes/font_size = 16
+text = "Clear"
+
+[connection signal="pressed" from="VBoxContainer/AspectRatioContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/AspectRatioContainer/Stop" to="." method="_on_stop_pressed"]
+[connection signal="timeout" from="Clock" to="." method="_on_clock_timeout"]
+[connection signal="toggled" from="CenterContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="Clear" to="." method="_on_clear_pressed"]
