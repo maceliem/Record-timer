@@ -3,6 +3,10 @@ var time := 0
 var highScore := 0
 var fast = false
 
+func _ready():
+	MobileAds.config.banner.position = 0
+	MobileAds.load_banner()
+
 func _on_start_pressed():
 	time = 0
 	$VBoxContainer/Label.remove_theme_color_override("font_color")
