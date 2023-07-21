@@ -9,6 +9,7 @@ var button:Button
 func _ready():
 	MobileAds.config.banner.position = 0
 	MobileAds.load_banner()
+	$name.text = name
 
 func _on_start_pressed():
 	time = 0
@@ -35,6 +36,7 @@ func _on_stop_pressed():
 		highScore = time
 	_updateTime(highScore, $highScore)
 	button.text = $name.text + "\n" + $highScore.text
+	Data.saveProgram()
 	
 func _updateTime(val:int, elm:Label):
 	var hour = floor(val/360000)
@@ -87,3 +89,4 @@ func _on_back_pressed():
 func _on_name_text_changed():
 	name = $name.text
 	button.text = name + "\n" + $highScore.text
+	Data.saveProgram()

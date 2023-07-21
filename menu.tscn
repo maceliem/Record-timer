@@ -3,10 +3,16 @@
 [ext_resource type="Script" path="res://menu.gd" id="1_2etxg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wynwy"]
+bg_color = Color(0.184314, 0.184314, 0.184314, 1)
 border_width_left = 40
 border_width_top = 8
 border_width_right = 40
 border_width_bottom = 8
+border_color = Color(0.184314, 0.184314, 0.184314, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="Theme" id="Theme_ces74"]
 Button/font_sizes/font_size = 32
@@ -21,24 +27,19 @@ offset_top = 64.0
 offset_right = 224.0
 offset_bottom = 532.0
 grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme = SubResource("Theme_ces74")
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 16
 columns = 2
 script = ExtResource("1_2etxg")
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Planke
-00:00.00"
-
 [node name="addTimer" type="Button" parent="."]
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 77
 text = "+"
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="pressed" from="addTimer" to="." method="_on_add_timer_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
