@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq635783qymhj"]
+[gd_scene load_steps=7 format=3 uid="uid://dq635783qymhj"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_2etxg"]
+[ext_resource type="Theme" uid="uid://cq3bgtj642rw6" path="res://theme.tres" id="2_gm0x8"]
+[ext_resource type="Texture2D" uid="uid://b1wgfyojxn4ri" path="res://assets/enduranceWhite.png" id="3_bxxu7"]
+[ext_resource type="Texture2D" uid="uid://cte26nfae68w7" path="res://assets/speedWhite.png" id="4_ovysb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wynwy"]
 bg_color = Color(0.184314, 0.184314, 0.184314, 1)
@@ -18,7 +21,8 @@ corner_radius_bottom_left = 20
 Button/font_sizes/font_size = 32
 Button/styles/normal = SubResource("StyleBoxFlat_wynwy")
 
-[node name="GridContainer" type="GridContainer"]
+[node name="Control" type="Control"]
+layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -27,19 +31,110 @@ offset_top = 64.0
 offset_right = 224.0
 offset_bottom = 532.0
 grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = SubResource("Theme_ces74")
-theme_override_constants/h_separation = 32
-theme_override_constants/v_separation = 16
-columns = 2
 script = ExtResource("1_2etxg")
-
-[node name="addTimer" type="Button" parent="."]
-layout_mode = 2
-theme_override_font_sizes/font_size = 77
-text = "+"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="pressed" from="addTimer" to="." method="_on_add_timer_pressed"]
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_gm0x8")
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="addTimer" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 77
+text = "+"
+clip_text = true
+
+[node name="makeTimer" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.5
+offset_top = -139.0
+offset_right = 227.5
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_gm0x8")
+color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="makeTimer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Label" type="Label" parent="makeTimer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Create new timer"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="makeTimer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Timer name"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="makeTimer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="makeTimer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="type" type="Button" parent="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+icon = ExtResource("3_bxxu7")
+
+[node name="Label" type="Label" parent="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Endurance"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="makeTimer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="type" type="Button" parent="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+icon = ExtResource("4_ovysb")
+
+[node name="Label" type="Label" parent="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Speed"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="GridContainer/addTimer" to="." method="_on_add_timer_pressed"]
+[connection signal="pressed" from="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer/type" to="." method="_on_type_pressed" binds= [false]]
+[connection signal="pressed" from="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer2/type" to="." method="_on_type_pressed" binds= [true]]

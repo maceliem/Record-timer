@@ -10,13 +10,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_2mpgd")
 script = ExtResource("1_1yi5r")
 
 [node name="highScore" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 135.0
+offset_top = 202.0
+offset_bottom = 337.0
 grow_horizontal = 2
 theme = ExtResource("1_2mpgd")
 theme_override_colors/font_color = Color(0.890196, 0.803922, 0.239216, 1)
@@ -28,6 +30,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 383.0
+offset_bottom = -247.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -59,54 +63,43 @@ text = "Stop
 [node name="Clock" type="Timer" parent="."]
 wait_time = 0.01
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -260.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="CheckButton" type="CheckButton" parent="CenterContainer"]
-layout_mode = 2
-theme = ExtResource("1_2mpgd")
-
 [node name="Clear" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
 offset_left = -73.0
-offset_top = -264.5
-offset_bottom = -209.5
+offset_bottom = 55.0
 grow_horizontal = 0
-grow_vertical = 2
 theme = ExtResource("1_2mpgd")
-theme_override_font_sizes/font_size = 16
 text = "Clear"
 
 [node name="back" type="Button" parent="."]
 layout_mode = 0
-offset_right = 69.0
-offset_bottom = 139.0
+offset_right = 175.0
+offset_bottom = 70.0
+theme = ExtResource("1_2mpgd")
 text = "Back"
 
-[node name="name" type="TextEdit" parent="."]
+[node name="name" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 86.0
-offset_top = 159.0
-offset_right = 286.0
-offset_bottom = 262.0
+offset_top = 74.0
+offset_right = 477.0
+offset_bottom = 229.0
+theme = ExtResource("1_2mpgd")
 text = "Timer"
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 632.0
+offset_right = 202.0
+offset_bottom = 728.0
 
 [connection signal="pressed" from="VBoxContainer/AspectRatioContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/AspectRatioContainer/Stop" to="." method="_on_stop_pressed"]
 [connection signal="timeout" from="Clock" to="." method="_on_clock_timeout"]
-[connection signal="toggled" from="CenterContainer/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Clear" to="." method="_on_clear_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="text_changed" from="name" to="." method="_on_name_text_changed"]

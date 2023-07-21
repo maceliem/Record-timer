@@ -11,6 +11,7 @@ func _ready():
 	MobileAds.load_banner()
 	$name.text = name
 
+
 func _on_start_pressed():
 	time = 0
 	$VBoxContainer/Label.remove_theme_color_override("font_color")
@@ -67,10 +68,6 @@ func fastOrLong(a, b):
 		return b > a
 
 
-func _on_check_button_toggled(button_pressed):
-	fast = button_pressed
-
-
 func _on_clear_pressed():
 	time = 0
 	highScore = 0
@@ -86,7 +83,10 @@ func _on_back_pressed():
 	get_tree().root.remove_child(self)
 
 
-func _on_name_text_changed():
+func _on_name_text_changed(new_text):
 	name = $name.text
 	button.text = name + "\n" + $highScore.text
+	#if button.size.x > 208:
+	#	var i = 32 * 208/button.size.x
+	#	button.add_theme_font_size_override("font_size", i)
 	Data.saveProgram()

@@ -1,10 +1,10 @@
-extends GridContainer
+extends Control
 
 var timerPage = preload("res://timer.tscn")
 var curButton
 
 func _ready():
-	if get_child_count() > 2 : return
+	if $GridContainer.get_child_count() > 1 : return
 	for savedTimer in Data.loadProgram():
 		var button := Button.new()
 		var timer:TimerPage = timerPage.instantiate()
@@ -16,21 +16,12 @@ func _ready():
 		button.button_down.connect(buttonDown.bind(button))
 		button.button_up.connect(buttonUp.bind(button))
 		Data.timerList[button] = timer
-		add_child(button)
-		move_child(get_node("addTimer"),get_child_count()-1)
+		button.size_flags_horizontal = 3
+		$GridContainer.add_child(button)
+		$GridContainer.move_child($GridContainer.get_node("addTimer"),$GridContainer.get_child_count()-1)
 
 func _on_add_timer_pressed():
-	var button := Button.new()
-	var timer:TimerPage = timerPage.instantiate()
-	timer.name = "New Timer"
-	button.text = "New Timer \n 00:00.00"
-	button.button_down.connect(buttonDown.bind(button))
-	button.button_up.connect(buttonUp.bind(button))
-	Data.timerList[button] = timer
-	add_child(button)
-	move_child(get_node("addTimer"),get_child_count()-1)
-	Data.menu = self
-	Data.saveProgram()
+	$makeTimer.visible = true
 
 func buttonDown(button):
 	$Timer.start()
@@ -50,4 +41,25 @@ func openTimer(button):
 
 
 func _on_timer_timeout():
-	if curButton != null: remove_child(curButton)
+	if curButton != null: $GridContainer.remove_child(curButton)
+
+
+func _on_type_pressed(fast:bool):
+	$makeTimer.visible = false
+	var button := Button.new()
+	var timer:TimerPage = timerPage.instantiate()
+	if $makeTimer/VBoxContainer/LineEdit.text != "":
+		timer.name = $makeTimer/VBoxContainer/LineEdit.text 
+	else: 
+		timer.name = "Timer"
+	timer.fast = fast
+	button.text = "Timer \n 00:00.00"
+	button.button_down.connect(buttonDown.bind(button))
+	button.button_up.connect(buttonUp.bind(button))
+	Data.timerList[button] = timer
+	button.size_flags_horizontal = 3
+	$GridContainer.add_child(button)
+	$GridContainer.move_child($GridContainer.get_node("addTimer"),$GridContainer.get_child_count()-1)
+	Data.menu = self
+	Data.saveProgram()
+	openTimer(button)
