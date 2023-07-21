@@ -41,7 +41,10 @@ func openTimer(button):
 
 
 func _on_timer_timeout():
-	if curButton != null: $GridContainer.remove_child(curButton)
+	if curButton != null: 
+		Data.timerList.erase(curButton)
+		$GridContainer.remove_child(curButton)
+		
 
 
 func _on_type_pressed(fast:bool):
