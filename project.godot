@@ -15,9 +15,11 @@ config={
 "position": 1,
 "respect_safe_area": true,
 "show_instantly": true,
-"size": "BANNER",
+"size": "FULL_BANNER",
 "unit_ids": {
-"Android": {},
+"Android": {
+"standard": "ca-app-pub-1885419653497441/6213015248"
+},
 "iOS": {
 "standard": "ca-app-pub-3940256099942544/2934735716"
 }
@@ -68,7 +70,7 @@ config={
 [application]
 
 config/name="Recordtimer"
-run/main_scene="res://timer.tscn"
+run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -76,6 +78,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 MobileAds="*res://addons/admob/src/singletons/MobileAds.gd"
+Data="*res://data.gd"
 
 [display]
 

@@ -1,7 +1,10 @@
 extends Control
+class_name TimerPage
+
 var time := 0
 var highScore := 0
 var fast = false
+var button:Button
 
 func _ready():
 	MobileAds.config.banner.position = 0
@@ -31,6 +34,7 @@ func _on_stop_pressed():
 	if fastOrLong(highScore, time) or highScore == 0:
 		highScore = time
 	_updateTime(highScore, $highScore)
+	button.text = $name.text + "\n" + $highScore.text
 	
 func _updateTime(val:int, elm:Label):
 	var hour = floor(val/360000)
@@ -73,3 +77,13 @@ func _on_clear_pressed():
 	_updateTime(highScore, $highScore)
 	$VBoxContainer/AspectRatioContainer/Start.visible = true
 	$VBoxContainer/AspectRatioContainer/Stop. visible = false
+
+
+func _on_back_pressed():
+	get_tree().root.add_child(Data.menu)
+	get_tree().root.remove_child(self)
+
+
+func _on_name_text_changed():
+	name = $name.text
+	button.text = name + "\n" + $highScore.text
