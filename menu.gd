@@ -42,10 +42,9 @@ func openTimer(button):
 
 func _on_timer_timeout():
 	if curButton != null: 
-		Data.timerList.erase(curButton)
-		$GridContainer.remove_child(curButton)
+		$confimDeleteTimer.visible = true
+		$confimDeleteTimer/VBoxContainer/Label.text = "Are you sure you want to delete " + curButton.text.get_slice("\n",0) + "?"
 		
-
 
 func _on_type_pressed(fast:bool):
 	$makeTimer.visible = false
@@ -66,3 +65,17 @@ func _on_type_pressed(fast:bool):
 	Data.menu = self
 	Data.saveProgram()
 	openTimer(button)
+
+
+func _on_cancel_pressed():
+	$makeTimer.visible = false
+
+
+func _on_keep_timer_pressed():
+	$confimDeleteTimer.visible = false
+
+
+func _on_delete_timer_pressed():
+	Data.timerList.erase(curButton)
+	$GridContainer.remove_child(curButton)
+	$confimDeleteTimer.visible = false

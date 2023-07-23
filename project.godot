@@ -73,7 +73,9 @@ config/name="Recordtimer"
 run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 boot_splash/show_image=false
-config/icon="res://icon.svg"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://assets/icon.png"
 
 [autoload]
 
