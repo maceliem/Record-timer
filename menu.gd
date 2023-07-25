@@ -4,7 +4,8 @@ var timerPage = preload("res://timer.tscn")
 var curButton
 
 func _ready():
-	if $GridContainer.get_child_count() > 1 : return
+	$makeTimer/VBoxContainer/LineEdit.text = ""
+	if $ScrollContainer/GridContainer.get_child_count() > 1 : return
 	for savedTimer in Data.loadProgram():
 		var button := Button.new()
 		var timer:TimerPage = timerPage.instantiate()
@@ -17,8 +18,8 @@ func _ready():
 		button.button_up.connect(buttonUp.bind(button))
 		Data.timerList[button] = timer
 		button.size_flags_horizontal = 3
-		$GridContainer.add_child(button)
-		$GridContainer.move_child($GridContainer.get_node("addTimer"),$GridContainer.get_child_count()-1)
+		$ScrollContainer/GridContainer.add_child(button)
+		$ScrollContainer/GridContainer.move_child($ScrollContainer/GridContainer.get_node("addTimer"),$ScrollContainer/GridContainer.get_child_count()-1)
 
 func _on_add_timer_pressed():
 	$makeTimer.visible = true
@@ -60,8 +61,8 @@ func _on_type_pressed(fast:bool):
 	button.button_up.connect(buttonUp.bind(button))
 	Data.timerList[button] = timer
 	button.size_flags_horizontal = 3
-	$GridContainer.add_child(button)
-	$GridContainer.move_child($GridContainer.get_node("addTimer"),$GridContainer.get_child_count()-1)
+	$ScrollContainer/GridContainer.add_child(button)
+	$ScrollContainer/GridContainer.move_child($ScrollContainer/GridContainer.get_node("addTimer"),$ScrollContainer/GridContainer.get_child_count()-1)
 	Data.menu = self
 	Data.saveProgram()
 	openTimer(button)
@@ -77,5 +78,6 @@ func _on_keep_timer_pressed():
 
 func _on_delete_timer_pressed():
 	Data.timerList.erase(curButton)
-	$GridContainer.remove_child(curButton)
+	$ScrollContainer/GridContainer.remove_child(curButton)
 	$confimDeleteTimer.visible = false
+	Data.saveProgram()

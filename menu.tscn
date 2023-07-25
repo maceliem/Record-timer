@@ -40,19 +40,21 @@ script = ExtResource("1_2etxg")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_right = 429.0
+offset_bottom = 764.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("2_gm0x8")
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 16
 columns = 2
 
-[node name="addTimer" type="Button" parent="GridContainer"]
+[node name="addTimer" type="Button" parent="ScrollContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -198,7 +200,7 @@ flat = true
 expand_icon = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="GridContainer/addTimer" to="." method="_on_add_timer_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/addTimer" to="." method="_on_add_timer_pressed"]
 [connection signal="pressed" from="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer/type" to="." method="_on_type_pressed" binds= [false]]
 [connection signal="pressed" from="makeTimer/VBoxContainer/HBoxContainer/VBoxContainer2/type" to="." method="_on_type_pressed" binds= [true]]
 [connection signal="pressed" from="makeTimer/cancel" to="." method="_on_cancel_pressed"]
