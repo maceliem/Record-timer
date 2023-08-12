@@ -9,8 +9,8 @@ func _ready():
 	for savedTimer in Data.loadProgram():
 		var timer:TimerPage = timerPage.instantiate()
 		timer._updateTime(savedTimer.highScore, timer.get_node("highScore"))
-		var buttonText = savedTimer.name + "\n" + timer.get_node("highScore").text
-		makeButton(savedTimer.fast, savedTimer.name, buttonText, savedTimer.highScore)
+		makeButton(savedTimer.fast, savedTimer.name, savedTimer.highScore)
+
 func _on_add_timer_pressed():
 	$makeTimer.visible = true
 
@@ -30,12 +30,10 @@ func openTimer(button):
 	get_tree().root.remove_child(self)
 	Data.menu = self
 
-
 func _on_timer_timeout():
 	if curButton != null: 
 		$confimDeleteTimer.visible = true
 		$confimDeleteTimer/VBoxContainer/Label.text = "Are you sure you want to delete " + curButton.text.get_slice("\n",0) + "?"
-		
 
 func _on_type_pressed(fast:bool):
 	$makeTimer.visible = false
@@ -43,11 +41,9 @@ func _on_type_pressed(fast:bool):
 	if $makeTimer/VBoxContainer/LineEdit.text != "":
 		txt = $makeTimer/VBoxContainer/LineEdit.text 
 	var button = makeButton(fast, txt)
-
 	Data.menu = self
 	Data.saveProgram()
 	openTimer(button)
-
 
 func _on_cancel_pressed():
 	$makeTimer.visible = false
@@ -63,14 +59,15 @@ func _on_delete_timer_pressed():
 	$confimDeleteTimer.visible = false
 	Data.saveProgram()
 
-func makeButton(fast:bool, name := "Timer", text := "Timer \n 00:00.00", highScore := 0):
-	var button := Button.new()
+func makeButton(fast:bool, name := "Timer", highScore := 0):
+	var button:Button = load("res://timerButton.tscn").instantiate()
 	var timer:TimerPage = timerPage.instantiate()
 	timer.fast = fast
-	button.text = text
 	button.button_down.connect(buttonDown.bind(button))
 	button.button_up.connect(buttonUp.bind(button))
 	timer._updateTime(highScore, timer.get_node("highScore"))
+	button.get_node("HBoxContainer/nameLabel").text = name
+	button.get_node("HBoxContainer/scoreLabel").text = timer.get_node("highScore").text
 	Data.timerList[button] = timer
 	button.size_flags_horizontal = 3
 	$ScrollContainer/GridContainer.add_child(button)
