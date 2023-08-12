@@ -67,6 +67,7 @@ func makeButton(fast:bool, name := "Timer", highScore := 0):
 	button.button_up.connect(buttonUp.bind(button))
 	timer._updateTime(highScore, timer.get_node("highScore"))
 	timer.name = name
+	timer.highScore = highScore
 	button.get_node("HBoxContainer/nameLabel").text = name
 	button.get_node("HBoxContainer/scoreLabel").text = timer.get_node("highScore").text
 	Data.timerList[button] = timer
