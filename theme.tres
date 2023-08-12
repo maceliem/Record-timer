@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://cq3bgtj642rw6"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://cq3bgtj642rw6"]
 
 [ext_resource type="Texture2D" uid="uid://cte26nfae68w7" path="res://assets/speedWhite.png" id="1_yc0fa"]
 [ext_resource type="Texture2D" uid="uid://b1wgfyojxn4ri" path="res://assets/enduranceWhite.png" id="2_2msvj"]
@@ -63,6 +63,19 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6oe2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.12549, 0.12549, 0.12549, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_28v2n"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8cx83"]
@@ -92,6 +105,7 @@ CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_prdmd")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_prdmd")
 CheckButton/styles/pressed = SubResource("StyleBoxFlat_prdmd")
 Label/font_sizes/font_size = 96
+Label/styles/normal = SubResource("StyleBoxFlat_w6oe2")
 LineEdit/font_sizes/font_size = 48
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_28v2n")
 LineEdit/styles/normal = SubResource("StyleBoxEmpty_8cx83")

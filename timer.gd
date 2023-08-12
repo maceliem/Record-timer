@@ -16,25 +16,25 @@ func _ready():
 func _on_start_pressed():
 	time = 0
 	timerOn = true
-	$VBoxContainer/Label.remove_theme_color_override("font_color")
-	_updateTime(time, $VBoxContainer/Label)
+	$Label.remove_theme_color_override("font_color")
+	_updateTime(time, $Label)
 	$Clock.start()
-	$VBoxContainer/AspectRatioContainer/Start.visible = false
-	$VBoxContainer/AspectRatioContainer/Stop. visible = true
+	$AspectRatioContainer/Start.visible = false
+	$AspectRatioContainer/Stop. visible = true
 
 
 func _on_clock_timeout():
 	time += 5
-	_updateTime(time, $VBoxContainer/Label)
+	_updateTime(time, $Label)
 	if fastOrLong(highScore, time):
-		$VBoxContainer/Label.add_theme_color_override("font_color", Color(0, 223, 0))
+		$Label.add_theme_color_override("font_color", Color(0, 223, 0))
 	elif highScore != 0:
-		$VBoxContainer/Label.add_theme_color_override("font_color", Color(193, 0, 0))
+		$Label.add_theme_color_override("font_color", Color(193, 0, 0))
 
 func _on_stop_pressed():
 	$Clock.stop()
-	$VBoxContainer/AspectRatioContainer/Start.visible = true
-	$VBoxContainer/AspectRatioContainer/Stop. visible = false
+	$AspectRatioContainer/Start.visible = true
+	$AspectRatioContainer/Stop. visible = false
 	if fastOrLong(highScore, time) or highScore == 0:
 		highScore = time
 	_updateTime(highScore, $highScore)
@@ -73,11 +73,11 @@ func fastOrLong(a, b):
 func _on_clear_pressed():
 	time = 0
 	highScore = 0
-	$VBoxContainer/Label.remove_theme_color_override("font_color")
-	_updateTime(time, $VBoxContainer/Label)
+	$Label.remove_theme_color_override("font_color")
+	_updateTime(time, $Label)
 	_updateTime(highScore, $highScore)
-	$VBoxContainer/AspectRatioContainer/Start.visible = true
-	$VBoxContainer/AspectRatioContainer/Stop. visible = false
+	$AspectRatioContainer/Start.visible = true
+	$AspectRatioContainer/Stop. visible = false
 
 
 func _on_back_pressed():
