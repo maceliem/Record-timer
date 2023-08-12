@@ -61,7 +61,7 @@ text = "Stop
 "
 
 [node name="Clock" type="Timer" parent="."]
-wait_time = 0.01
+wait_time = 0.05
 
 [node name="Clear" type="Button" parent="."]
 layout_mode = 1
